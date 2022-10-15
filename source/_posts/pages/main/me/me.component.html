@@ -1,0 +1,33 @@
+<WingBlank [size]="'lg'">
+  <Card>
+    <CardHeader
+      [title]="userInfo.name"
+      [extra]="extra"
+      [thumb]="userInfo.headimgurl"
+      [thumbStyle]="thumbStyle"
+    >
+      <ng-template #extra>
+        <span>昵称：{{userInfo.nickName}}</span>
+        <br>
+      </ng-template>
+    </CardHeader>
+
+  </Card>
+</WingBlank>
+
+
+<br>
+<br>
+
+
+
+<!--菜单列表-->
+<List [className]="'my-list'">
+  <ListItem routerLink="/readinformation/{{userInfo.openId}}">详细阅读时长信息</ListItem>
+</List>
+<List [className]="'my-list'" routerLink="/aboutme">
+  <ListItem routerLink="/aboutme">关于我</ListItem>
+</List>
+<List [className]="'my-list'" routerLink="/feedback">
+  <ListItem routerLink="/feedback">反馈</ListItem>
+</List>

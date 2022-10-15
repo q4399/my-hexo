@@ -1,0 +1,42 @@
+<Navbar [icon]="icon" [mode]="'light'" (onLeftClick)="onLeftClick()">
+  反馈及其开发人员联系
+</Navbar>
+<ng-template #icon>
+  <Icon [type]="'left'"></Icon>
+</ng-template>
+
+<br>
+
+<div style="text-align: center">
+  <div style="font-size: x-large">开发人员联系</div>
+  <br>
+  <div>技术支持:MPC计算机社</div>
+  <div>因开发时间极短，如出现一些致命BUG欢迎反馈。</div>
+  <div>QQ：1617444646</div>
+  <div>谢谢您的支持</div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div style="font-size: x-large">反馈</div>
+  <!--  反馈完成信息提示-->
+  <div *ngIf="success" style="font-size: large">{{success}}</div>
+  <br>
+  <br>
+  <div class="am-demo-page">
+
+    <div class="am-list" style="margin:0;">
+      <div class="am-list-body">
+        <TextareaItem [rows]="5" [count]="500" [(ngModel)]="value" [value]="value"></TextareaItem>
+      </div>
+    </div>
+    <br>
+    <div Button [type]="'primary'" (click)="submit(openId,value)">提交</div>
+    <WhiteSpace></WhiteSpace>
+  </div>
+</div>
+
+
+
+

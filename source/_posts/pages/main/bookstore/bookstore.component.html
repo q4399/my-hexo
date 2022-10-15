@@ -1,0 +1,20 @@
+<div *ngIf="bookStarList.length === 0" style="font-size: large">
+  你还没有收藏任何书籍哦，快去看看吧。
+</div>
+<!--图书卡片-->
+<WingBlank [size]="'lg'">
+  <Card *ngFor="let item of bookStarList" routerLink="/bookInfo/{{item.bookId}}">
+    <CardHeader
+      [extra]="extra"
+      [thumb]="item.image"
+      [thumbStyle]="thumbStyle"
+    >
+      <ng-template #extra>
+        <span>{{item.bookName | slice:0:5}}...</span>
+        <div>作者：{{item.author | slice:0:3}}...</div>
+      </ng-template>
+    </CardHeader>
+
+  </Card>
+
+</WingBlank>

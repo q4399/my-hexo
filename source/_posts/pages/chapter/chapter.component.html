@@ -1,0 +1,14 @@
+<Navbar [icon]="icon" [mode]="'light'" (onLeftClick)="onLeftClick()">
+  章节信息
+</Navbar>
+
+
+<ng-template #icon>
+  <Icon [type]="'left'"></Icon>
+</ng-template>
+
+
+
+<List [className]="'my-list'" [renderHeader]="renderHeader">
+  <ListItem *ngFor="let item of chapterList" >{{item.chapterName}}</ListItem>
+</List>

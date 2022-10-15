@@ -1,0 +1,91 @@
+<div>
+  <Navbar [icon]="icon" (onLeftClick)="onOpenChange($event)" [rightContent]="'目录'">
+    {{chapterName | slice:0:10}}
+  </Navbar>
+  <Drawer
+    class="my-drawer"
+    [ngStyle]="{ minHeight: this.height + 'px' }"
+    [enableDragHandle]="true"
+    [sidebar]="sidebar"
+    [open]="this.state.open"
+    (onOpenChange)="onOpenChange($event)"
+  >
+
+    <!--    这是正文-->
+
+
+    <ng-template #icon>
+      <Icon type="ellipsis"></Icon>
+    </ng-template>
+
+    <ng-template #sidebar>
+      <List>
+        <ListItem [multipleLine]="false" style="background-color: aquamarine" (click)="comeBack()">
+          返回
+        </ListItem>
+        <ListItem [multipleLine]="false" (click)="fontsize(true)">
+          字体 +
+        </ListItem>
+        <ListItem [multipleLine]="false" (click)="fontsize(false)">
+          字体 -
+        </ListItem>
+        <ListItem
+          *ngFor="let item of chapterList; let i = index"
+          (click)="getChapterById(item.id)"
+
+        >
+          {{item.chapterName}}
+        </ListItem>
+      </List>
+    </ng-template>
+
+
+    <div>
+
+
+      <div class="listen" [style]="colorAndBack" id="top">
+        <div
+          style="
+          text-indent: 15px;
+          margin-left: 20px;
+          margin-right: 20px;
+          line-height: 35px;
+          font-family: Source Han Sans CN;"
+          [innerHTML]="readInfo.include | noSanitize"
+             (click)="onOpenChange($event)"></div>
+
+        <br>
+        <div class="pagination-container">
+          <Pagination class="page"
+                      [total]="readInfo.allChapter"
+                      [current]="readInfo.chapter"
+                      [locale]="locale"
+                      [mode]="'number'"></Pagination>
+        </div>
+
+        <WingBlank>
+
+          <div Button [type]="'primary'" (click)="upChapter(readInfo.chapter)">下一章</div>
+          <WhiteSpace></WhiteSpace>
+          <div Button [type]="'primary'" (click)="downChapter(readInfo.chapter)">上一章</div>
+          <WhiteSpace></WhiteSpace>
+
+          <!--     调节背景颜色     -->
+          <div Button [type]="'primary'" (onClick)="showAlertMuchButtons(message)">调节颜色</div>
+          <WhiteSpace></WhiteSpace>
+          <ng-template #message>
+            <div>选择不同的字体和背景配色</div>
+          </ng-template>
+
+          <div Button [type]="'primary'" (click)="comeBack()">返回</div>
+          <WhiteSpace></WhiteSpace>
+
+        </WingBlank>
+      </div>
+
+    </div>
+
+  </Drawer>
+</div>
+
+

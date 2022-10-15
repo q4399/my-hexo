@@ -1,0 +1,87 @@
+<Navbar [icon]="icon" [mode]="'light'" (onLeftClick)="onLeftClick()">
+  图书信息
+</Navbar>
+
+
+<ng-template #icon>
+  <Icon [type]="'left'"></Icon>
+</ng-template>
+
+
+<Card [full]="true">
+  <CardHeader
+    [title]="bookInfo.bookName"
+    [thumb]="bookInfo.image"
+    [thumbStyle]="thumbStyle"
+  >
+  </CardHeader>
+  <CardBody>
+    <div>作者:{{bookInfo.author}}</div>
+    <div>出版日期:
+      <br>
+      {{bookInfo.time}}</div>
+    <br>
+    <div>用户id：{{userInfo.openId}}</div>
+    <div>用户昵称:{{userInfo.nickName}}</div>
+  </CardBody>
+
+  <CardFooter
+    [content]="'你当前已经阅读了'+readInfo.current+'%。'+'该书共有'+readInfo.allChapter+'章,你已经读了'+readInfo.chapter+'章。'"></CardFooter>
+  <br>
+  <CardFooter content="你今天已经阅读了{{readInfo.todayTime|hourPipe}}。你总共阅读了{{readInfo.totalTime|hourPipe}},加油吧!"></CardFooter>
+</Card>
+
+
+<br>
+
+<!--阅读-->
+<WingBlank>
+
+  <div Button [type]="'primary'" routerLink="/read/{{bookId}}">开始阅读</div>
+  <WhiteSpace></WhiteSpace>
+  <div Button [type]="'default'" *ngIf="!isStar" (click)="star()">收藏图书</div>
+<!--  <WhiteSpace></WhiteSpace>-->
+  <div Button [type]="'default'" *ngIf="isStar" (click)="star()">取消收藏</div>
+  <WhiteSpace></WhiteSpace>
+  <!--  跳转到章节（没必要）-->
+  <!--  <div Button [type]="'default'" routerLink="/chapter/{{bookInfo.bookId}}">章节信息</div>
+    <WhiteSpace></WhiteSpace>-->
+
+</WingBlank>
+
+<!--输入评论区域-->
+
+
+<div class="am-demo-page">
+  <div class="am-list" style="margin:0;">
+
+    <div class="am-list" style="margin:0;">
+      <div class="am-list-header">请输入评论：</div>
+      <div class="am-list-body">
+        <TextareaItem [rows]="5" [count]="500" [value]="value" [(ngModel)]="value" [clear]="true">评论信息</TextareaItem>
+      </div>
+
+      <div Button [type]="'primary'" (click)="submit(userInfo.openId,value,bookId)">提交评论</div>
+    </div>
+
+
+  </div>
+</div>
+
+<br>
+
+<!--评论内容-->
+<Card [full]="true" *ngFor="let item of commentList">
+  <CardHeader
+    [title]="item.nickName"
+    [extra]="extra"
+    [thumb]="item.headimgurl"
+    [thumbStyle]="thumbStyleForComment"
+  >
+    <!--    添加时间-->
+    <ng-template #extra>
+      <span>{{item.createTime | slice:0:10}}</span>
+    </ng-template>
+  </CardHeader>
+  <nzm-card-body>{{item.comment}}</nzm-card-body>
+</Card>

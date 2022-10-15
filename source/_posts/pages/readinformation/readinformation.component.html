@@ -1,0 +1,43 @@
+<Navbar [icon]="icon" [mode]="'light'" (onLeftClick)="onLeftClick()">
+  阅读时长信息
+</Navbar>
+
+
+<ng-template #icon>
+  <Icon [type]="'left'"></Icon>
+</ng-template>
+
+<Card [full]="true">
+  <CardHeader
+    [title]="'ID:'+userInfo.openId"
+    [extra]="'昵称:'+userInfo.nickName"
+    [thumb]="userInfo.headimgurl"
+    [thumbStyle]="thumbStyle"
+  >
+
+  </CardHeader>
+  <CardBody>
+    <div>您今日阅读时长为：{{userInfo.todayMinutes | hourPipe}}分钟</div>
+  </CardBody>
+
+  <CardFooter content="您的总阅读时长为{{userInfo.totalMinutes|hourPipe}}" [extra]="footerExtra">
+    <ng-template #footerExtra>
+      <div>现在时间为：{{today}}</div>
+    </ng-template>
+  </CardFooter>
+</Card>
+<br>
+<br>
+
+<div>您的往日阅读时长消息为:</div>
+<div *ngIf="userReadLog">
+  <Card [full]="true" *ngFor="let item of userReadLog">
+
+    <CardBody>
+      <div>您在{{item.todayTime}}阅读时长为：{{item.todayRead| hourPipe}}</div>
+    </CardBody>
+
+    <CardFooter content="您的总阅读时长为{{item.totalRead|hourPipe}}"></CardFooter>
+  </Card>
+
+</div>
